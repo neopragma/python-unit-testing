@@ -1,7 +1,7 @@
 class Age:
 
     def categorize_by_age(age):
-        if 0 <= age <= 9:
+        if 0 < age <= 9:
             return "Child"
         elif 9 < age <= 18:
             return "Adolescent"

@@ -1,0 +1,4 @@
+# file: /Users/davidnicolette/Documents/Projects/python-unit-testing/property_tests/../src/rpn.py
+# hypothesis_version: 6.131.18
+
+['%', '*', '+', '-', '/', 'Invalid input', 'P', '[+\\-*/%Pp]+', '[\\d]', 'c', 'p']

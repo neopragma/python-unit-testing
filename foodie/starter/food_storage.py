@@ -7,6 +7,7 @@ class FoodStorage:
 
     def store(self, product_id, product_info_as_json):
         product_status = product_info_as_json['status_verbose']
+        # keywords is an array, sqlite3 does not support array, so we convert it to string
         keywords = str(product_info_as_json['product']['_keywords'])
         main_ingredient = product_info_as_json['product']['ingredients'][0]['id']
         processing = product_info_as_json['product']['ingredients'][0]['processing']
@@ -36,7 +37,7 @@ class FoodStorage:
                 product_status = row[0] 
                 keywords = ast.literal_eval(row[1]) # string to array
                 main_ingredient = row[2][3:]    # strip language code,  
-                processing = row[3][3:]         # e.g. 'en:ingredient'
+                processing = row[3][3:]         # e.g. 'en:ingredient' -> 'ingredient'
                 is_vegan = row[4]
                 if is_vegan == 1:
                     is_vegan = 'Yes' 

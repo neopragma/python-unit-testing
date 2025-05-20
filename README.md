@@ -133,6 +133,9 @@ q
 
 ## Python packages used in this workshop 
 
-- [pytest - unit testing library](https://docs.pytest.org/en/stable/)
+- [ast - abstract syntax trees](https://docs.python.org/3/library/ast.html)
 - [hypothesis - property-based testing](https://hypothesis.readthedocs.io/en/latest/)
 - [mutmut - Python mutation tester](https://mutmut.readthedocs.io/en/latest/index.html)
+- [pytest - unit testing library](https://docs.pytest.org/en/stable/)
+- [requests - HTTP request and response](https://pypi.org/project/requests/)
+- [sqlite3 - database](https://docs.python.org/3/library/sqlite3.html)

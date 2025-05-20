@@ -9,7 +9,7 @@ This repo supports a presentation and workshop. All the presentation material is
 1. Writing unit tests for existing code 
 1. Guiding new development and modifications from unit tests
 1. Unit test suite as a safety net for refactoring
-1. Mocking dependencies 
+1. Mocking dependencies, refactoring 
 1. Property-based testing 
 1. Mutation testing 
 1. Exploratory testing 

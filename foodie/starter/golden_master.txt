@@ -1,0 +1,9 @@
+self.api_key is  https://world.openfoodfacts.org/api/v0/product/0044300000124
+Product Id:  0044300000124
+Product Status:  product found
+Keywords:
+-  bean
+-  refried
+Main Ingredient:  pinto-beans
+Processing:  cooked
+Is Vegan:  Yes

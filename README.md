@@ -2,7 +2,7 @@
 
 ## Walkthrough 
 
-This repo supports a presentation and workshop. All the presentation material is not present here. The general flow of topics is as follows. Some notes about running the examples are provided below.
+This repo supports a presentation and workshop. All the presentation material is not present here. Some notes about running the examples are provided below. This is not complete documentation for self-guided learning. It supports a live session that has the following general agenda:
 
 1. Testing vs. checking 
 1. Test automation pyramid 
@@ -97,6 +97,15 @@ python3 food_run.py '0 44300 00012 4'
 If the UPC code is no longer valid, look for another one here: https://www.upcitemdb.com/upc/44300000124. The sample code doesn't depend on any particular food item, provided the description matches the format used by the API, https://world.openfoodfacts.org/api/v0/product/.
 
 Examine ```food_run.py```, ```foodie.py```, and ```food_storage.py``` and think about how you might isolate different parts of the code for automated checking ("testing"). You will have to do some refactoring to enable this. A sample solution is provided under ```foodie/solution```. 
+
+### Create a "golden master" for Approval Testing
+
+If you want to use the Approval Testing approach when refactoring the 'foodie' code, you can run this script:
+
+```shell 
+cd [project-root/foodie/starter/]
+/run.sh > golden_master.txt 
+```
 
 ### Run the property-based tests 
 

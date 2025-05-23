@@ -2,17 +2,17 @@
 
 ## Walkthrough 
 
-This repo supports a presentation and workshop. All the presentation material is not present here. Some notes about running the examples are provided below. This is not complete documentation for self-guided learning. It supports a live session that has the following general agenda:
+This repo supports a presentation and workshop. Some notes about running the examples are provided below. This is not complete documentation for self-guided learning. The live session has the following general agenda:
 
-1. Testing vs. checking 
-1. Test automation pyramid 
-1. Writing unit tests for existing code 
-1. Guiding new development and modifications from unit tests
-1. Unit test suite as a safety net for refactoring
-1. Mocking dependencies, refactoring 
-1. Property-based testing 
-1. Mutation testing 
-1. Exploratory testing 
+1. (Talk) Testing vs. checking 
+1. (Talk) Test automation pyramid 
+1. (Code) Writing unit tests for existing code 
+1. (Code) Guiding new development and modifications from unit tests
+1. (Code) Unit test suite as a safety net for refactoring
+1. (Code) Mocking dependencies, refactoring 
+1. (Code) Property-based testing 
+1. (Code) Mutation testing 
+1. (Talk) Exploratory testing 
 
 ## Running the examples 
 
@@ -134,9 +134,6 @@ mutmut browse
 
 q
 ``` 
-
-
-
 
 ## Some resources
 

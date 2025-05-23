@@ -10,8 +10,8 @@ This repo supports a presentation and workshop. Some notes about running the exa
 1. (Code) Guiding new development and modifications from unit tests
 1. (Code) Unit test suite as a safety net for refactoring
 1. (Code) Mocking dependencies, refactoring 
-1. (Code) Property-based testing 
-1. (Code) Mutation testing 
+1. (Demo) Property-based testing 
+1. (Demo) Mutation testing 
 1. (Talk) Exploratory testing 
 
 ## Running the examples 

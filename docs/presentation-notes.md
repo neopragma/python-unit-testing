@@ -353,7 +353,7 @@ _run the sample PBT tests_
 
 A mutation testing tool will modify conditional logic in the SUT to see if our unit test suite will detect the changes. The modifications are called _mutants_. 
 
-Any mutant that isn't detected by the unit test suite is said to have _survived_. Our goal is to ensure out unit test suite kills all mutants. 
+Any mutant that isn't detected by the unit test suite is said to have _survived_. Our goal is to ensure our unit test suite kills all mutants. 
 
 Mutation testing tools only work when the unit test suite is green - that is, all the test cases pass. 
 

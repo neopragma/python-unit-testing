@@ -1,5 +1,4 @@
 import pytest
-import sys
 from rpn import RPN as rpn
 
 class TestRPN():
@@ -69,6 +68,3 @@ class TestRPN():
         rpn.enter(rpn, "2")
         assert rpn.enter(rpn,"C") == ""
 
-
-if __name__ == '__main__':
-    pytest.main()

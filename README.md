@@ -9,7 +9,10 @@ This repo supports a presentation and workshop. Some notes about running the exa
 1. (Code) Writing unit tests for existing code 
 1. (Code) Guiding new development and modifications from unit tests
 1. (Code) Unit test suite as a safety net for refactoring
-1. (Code) Mocking dependencies, refactoring 
+1. (Code) Refactoring 
+1. (Code) Mocking dependencies 
+1. (Code) Using an LLM assistant 
+1. (Talk) Where do unit tests fit in a CI/CD pipeline?
 1. (Demo) Property-based testing 
 1. (Demo) Mutation testing 
 1. (Talk) Exploratory testing 

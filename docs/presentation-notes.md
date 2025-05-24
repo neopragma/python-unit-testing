@@ -257,7 +257,7 @@ Emily Bache based the Gilded Rose refactoring kata on previous work by Bobby Joh
 
 ## Techniques for Working with Existing Codebases 
 
-People have had to work with existing codebases for as long as there software has existed. Some have come up with practical techniques that help us get started with it. 
+People have had to work with existing codebases for as long as software has existed. Some have come up with practical techniques that help us get started with it. 
 
 I think Michael Feathers is the person who coined the term "seams" to refer to places in monolithic code where there's an obvious place to separate out some of the logic - for some definition of "obvious." 
 

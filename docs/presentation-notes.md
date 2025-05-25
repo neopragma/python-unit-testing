@@ -449,7 +449,7 @@ In my experience, there is value in doing this. However, if a JavaScript functio
 
 #### GUI Perceived Response Time
 
-I guess it's pretty obvious that _perceived response time_ won't be testable at the "unit" level because in order to measure it we have to make round trips to the back end. 
+I guess it's pretty obvious that _perceived response time_ won't be testable at the "unit" level because in order to measure it we have to make round trips to the back end. In fact, we'd have to make a whole lot of round trips under different loads and operating conditions. Far out of scope for unit checks.
 
 #### Thick-Client GUIs 
 

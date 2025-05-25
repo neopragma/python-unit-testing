@@ -469,6 +469,12 @@ A rule of thumb for designing such applications is to separate the "business log
 
 Typically, there's no need to unit test glue code separately from the rest of the application. Any issues with it will pop up immediately during integration testing. The most we can do with it is to assert that our code issues the correct calls to the framework's APIs; that's an implementation-aware check and therefore fragile. 
 
+### What About Solutions Based on "Cloud" Resources?
+
+It's possible to build a wide range of useful solutions using Internet-based resources such as Microsoft Azure, without hand-coding most (if any) of the application in a conventional programming language. 
+
+In many cases, the lowest level of the "pyramid" where it makes sense to build automated checks is somewhere above the unit level. It may be feasible to write unit checks for individual units of custom code that we integrate with the tool's built-in workflow or pipeline facility. However, a lot of that code ends up being "glue" code. Keep Dude's Law in mind when deciding how much of this code to unit test.
+
 ## What About Metrics Related to Unit Testing? 
 
 It's not uncommon for people to get carried away with test-related metrics. The most popular metric for abuse is _code coverage_, especially line coverage. The value of this metric is already questionable, and the value of trying to achieve a coverage target doubly so. 

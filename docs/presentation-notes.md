@@ -563,7 +563,11 @@ The combination of different kinds of checking and testing, at different levels 
 
 But there are no guarantees! Such things as the number of processor cores in a given server, a memory leak in an application that shares a server with ours, gray failures in a cloud environment, intentional hacking, and timing issues in distributed applications can't be reliably replicated in a test environment prior to deployment. 
 
-That's the reason we need observability tools in production, and a rational strategy for managing production server instances. Those topics are out of scope here, but the key point to take away is that some form of checking or testing occurs throughout the lifetime of the product. 
+That's the reason we need observability tools in production, and a rational strategy for managing production server instances. Those topics are out of scope here, but the key point to take away is that some form of checking or testing occurs throughout the lifetime of the product.
+
+Automated checks can catch many issues before they become problematic, but no form of testing or checking can catch every potential issue. The time never comes when we can afford to stop paying attention.
+
+And this is not something that should be set aside in favor of rapidly cranking out just one more User Story before the end of a Sprint. What's the use of delivering that User Story if it's only going to break the application because it wasn't sufficiently checked and tested? It's false economy.
 
 
 

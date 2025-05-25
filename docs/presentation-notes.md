@@ -407,7 +407,7 @@ Structure, layout, and look and feel might sound like different terms for the sa
 
 By _structure_ I mean the component parts of each HTML document; things like the header, footer, sidebar, menu bar, and main content area. There may be a specific place where your company logo should appear. There may be a required favicon. There may be required meta tags.
 
-When your company has standards for these things, it's possible to write unit checks that verify each HTML document contains the required elements, typically organized in the document body as <div>s that have unique IDs or names. The elements may be defined in (or generated as) a single unit, or they may be assembled at runtime from different sources. 
+When your company has standards for these things, it's possible to write unit checks that verify each HTML document contains the required elements, typically organized in the document body as DIV elements that have unique IDs or names. The elements may be defined in (or generated as) a single unit, or they may be assembled at runtime from different sources. 
 
 The fact the structure of an HTML document _can_ be unit tested doesn't automatically mean it's _worth_ unit testing it. 
 

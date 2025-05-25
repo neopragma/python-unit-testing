@@ -177,7 +177,7 @@ _let participants work - assist as needed - discuss outcomes and how it felt_
 
 A long time ago, people came to realize that delaying testing until late in the delivery process leads to all kinds of trouble. Problems were not detected until most of the project schedule was used up and most of the budget spent. 
 
-People started talking about shifting testing left, meaning starting testing activities earlier in the delivery cycle. This is assuming we read from right to left, of course. 
+People started talking about shifting testing left, meaning starting testing activities earlier in the delivery cycle. This is assuming we read from left to right, of course. 
 
 Before long, some people were shifting testing - or some of it, anyway - so far to the left that it happened before coding. Since there was no code for the tests to test, this changed the dynamic of software development in some ways. 
 

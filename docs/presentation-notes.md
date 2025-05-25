@@ -3,7 +3,7 @@
 
 This workshop is a basic, hands-on introduction to fundamental unit testing concepts and practices. This version of the workshop uses Python for the hands-on work.
 
-The introduction is broad rather than deep - we'll touch on three kinds of executable tests that typically exercise code at the "unit" level, including example-based testing, property-based testing, and mutation testing. 
+The introduction is broad rather than deep. We'll touch on three kinds of executable tests that typically exercise code at the "unit" level, including example-based testing, property-based testing, and mutation testing. 
 
 We'll practice writing unit tests for existing code, writing unit tests as executable specifications to drive out new code, and refactoring existing code and using mocks to enable isolated unit testing. We'll demonstrate property-based tests and mutation tests. We will not go into great depth in any of these topics. 
 
@@ -331,9 +331,161 @@ It's a common convention to write the name as primer nombre, initial of the segu
 
 Use Copilot to enhance the previous solution per the instructions on the slide. 
 
+## When Unit Testing Is Not Useful
+
+When people are first introduced to ideas like executable unit tests and test-driven development, they often take a binary view of the subject - that is, they assume it must be _all or nothing_. That isn't really the case. 
+
+Executable unit tests can provide value in some situations and not in others. Test-driven development, understood in the strict sense, provides value in a substantial subset of the same situations. 
+
+I often meet teams and individuals who worry excessively about how to unit test user interfaces, front-end code, and "glue" code that connects libraries or frameworks with application logic. It's been my experience that these parts of an application may best be checked one level of abstraction above the "unit" level, using what most people refer to as _integration tests_. 
+
+It's useful to consider Dude's Law: Value = Why / How. 
+
+When the _How_ is large and the _Why_ is difficult to quantify, the effort to develop executable checks at the unit level may not be repaid. When we consider the fact the majority of production issues are related to configuration - either application or environment configuration - or problems that arise dynamically in the runtime environment, and that the majority of "bugs" pertain to integration between software components and not mis-coded "business logic," the relative value of these unit checks becomes harder to quantify.
+
+### How Much Automated Unit Testing Is Enough?
+
+Before jumping for joy at the prospect of avoiding unit testing altogether, bear this in mind: People who have little or no experience writing unit tests or test-driving their code tend to draw the line betweeen "valuable" and "not valuable" in a very different place than do more-experiened people. If you're new to this, give yourself a fair chance to build up a solid base of hands-on experience before making judgments without guidance. 
+
+### Generated Code 
+
+Source code that is automatically generated from a tool doesn't have to be test-driven or explicitly unit tested after the fact. 
+
+Consider Oracle's Application Development Framework, or ADF. Using an Oracle database schema as input, ADF generates a complete, functional CRUD application in Java. It can produce either a webapp or a thick client app. There is no value in trying to test-drive the Java code, and no practical way to do so since it's all based on XML templates. 
+
+With a basic CRUD app in place, we can write custom Java classes (POJOs - plain old Java objects) to provide functionality unique to our solution, and drop them into predifined spots in the request/response cycle where the ADF runtime will call them. Those POJOs can and should be test-driven. 
+
+Another example of this sort of tool is CA-Telon, currently owned by Broadcom. Telon generates a boilerplate application that can be customized. The generated code doesn't have to be explicitly unit tested; only the custom code that we add to the solution. 
+
+A smaller example of generated code is the ability of most IDEs to generate Java getters and setters, C# properties, and similar code elements for other languages. As long as we stick to the convention that a getter/setter contains no logic except to pass through to a non-public instance variable, and we don't hand-code the getter/setter, we can dispense with unit testing it. 
+
+It's the hand-coding that raises the need to unit test getters and setters, not the complexity of the logic within them. As long as they are automatically generated, we needn't unit test them.
+
+### Libraries, Frameworks, and External Resources  
+
+Don't try to unit test the third-party libraries and frameworks your application uses, or the functionality of external resources such as network-hosted services or database management systems. Their owners are responsible for that. Your job is to support your application. 
+
+When you need to unit test a piece of your own code that interacts with a library or framework, you can mock out the APIs to provide consistent replies to your unit tests. 
+
+Avoid the practice of asserting that your code issues exactly _n_ calls to method _notYourCode()_ and the like. That makes your unit check implementation-aware and therefore unreliable as a safety net for refactoring. Instead, assert values that are returned from method/function calls.
+
+### Command-Line User Interfaces 
+
+For command-line user interfaces, it's usually feasible to capture stdout, stderr, and output files as well as to fake stdin and input files. Then we can make assertions about what the code writes to these targets when specific inputs are provided through stdin and/or files. 
+
+In some cases, there may be some value in doing this. If we're diligent about applying the software engineering principle known as _separation of concerns_, then there will rarely be any interesting logic in the code that handles command-line interaction. Most issues will become apparent the moment we try to execute the application. 
+
+That code will use language-specific or OS-specific calls to receive and send input over the standard streams, to pick up command-line arguments, and possibly to read and write files. It will invoke an entry point in the application, and handle program termination when the application exits. And that's all. 
+
+The effort needed to setup and maintain unit tests for that kind of code may not return much value. 
+
+### Web Front-Ends 
+
+As of this writing, the majority of interactive applications that present a graphical user interface are Web-based applications, or webapps. The front-end for a webapp has to follow the rules for HTTP and ultimately the GUI widgets have to boil down to HTML, one way or another. 
+
+That means all Webapp front-ends will have many characteristics in common. They are almost, but not quite, the same front-end over and over again - if you take a crude view of it and don't ask too many questions about details.
+
+Conceptually, a Webapp front-end consists of the following: 
+
+- structure 
+- layout 
+- look and feel 
+- accessibility
+- localization 
+- security
+- content 
+- dynamic behavior 
+- perceived response time
+
+Structure, layout, and look and feel might sound like different terms for the same thing. Let's break them apart to see which of them may be unit testable, and whether it's worth doing so.
+
+#### GUI Structure
+
+By _structure_ I mean the component parts of each HTML document; things like the header, footer, sidebar, menu bar, and main content area. There may be a specific place where your company logo should appear. There may be a required favicon. There may be required meta tags.
+
+When your company has standards for these things, it's possible to write unit checks that verify each HTML document contains the required elements, typically organized in the document body as <div>s that have unique IDs or names. The elements may be defined in (or generated as) a single unit, or they may be assembled at runtime from different sources. 
+
+The fact the structure of an HTML document _can_ be unit tested doesn't automatically mean it's _worth_ unit testing it. 
+
+#### GUI Layout
+
+By _layout_ I mean the absolute or relative positioning of the structural elements of an HTML document within the viewport. Some front-end designs have floating elements, which makes checking the layout more challenging. In my experience, it's nearly always unnecessary to try and unit test the layout. 
+
+#### GUI Look-and-Feel
+
+By _look and feel_ I mean the way the UI is perceived by the user. We can check that appropriate backgrounds, colors, and fonts are used, and that certain media filenames are referenced in the HTML tags, but we can't automatically check what all of that actually looks like to a human. 
+
+#### GUI Accessibility
+
+_Accessibility_ is closely related to _look and feel_. The term refers to HTML elements that are meant to assist users who have one or more difficulties using a computer, such as visual impairment, hearing impairment, and movement impairment. 
+
+It's possible to verify that the HTML document and the elements it contains have the appropriate tags and values to support accessibility standards, but doing so has the same limitations as checking _look and feel_ generally - the presence of the appropriate HTML tag doesn't tell us anything about what a user actually experiences when using the application. This is usually verified more effectively during Exploratory Testing than through automated checks. 
+
+#### GUI Localization 
+
+A localized webapp will have its content generated dynamically, so there's nothing in the HTML document about which we can make assertions until the document has been rendered for a given locale. It's extremely tricky to write unit checks for this, and they will almost certainly be unreliable. Dude's Law steers us away from trying to unit test this aspect of the UI. 
+
+Tests or checks around localization are more commonly written against the mid-tier or back-end code that handles localization. We can assert the code supports _internationalization_ without having to know the exact _localized_ values of text. Other aspects of localization, such as color schemes, choices of photos for display, and decorative visual elements such as national flags or small animations, bleed over into the realm of _look and feel_. 
+
+In addition, localization is typically not within the scope of the software development team; it's handled by experts in the languages and cultures of the locales to be supported. The programmatic side of it is _internationalization_. 
+
+#### GUI Security
+
+Security for webapps usually comes down to configuration settings, for instance to disallow cross-site scripting. It's possible that JavaScript/TypeScript code running in the front-end will enable security exploits. That's covered in our unit checks for functions in the scripts. 
+
+#### GUI Content
+
+The _content_ of an HTML document can be checked at the unit test level. Be aware that content is subject to change more frequently than any other part of a user interface. Unit checks that depend on an element containing an exact text value will be fragile. 
+
+#### GUI Dynamic Behavior
+
+The _dynamic behavior_ of a front-end is usually coded in JavaScript or a language that can be transpiled to JavaScript. Given modular design and functions that follow generally-accepted software design principles such as _referential transparency_ and _avoiding hidden side-effects_ can be unit tested effectively. (Bear in mind we're not checking the results of a round-trip to the back end at the "unit" level.)
+
+In my experience, there is value in doing this. However, if a JavaScript function only changes the appearance of an HTML element, and otherwise contains no "business logic," there's limited value in unit testing it. 
+
+#### GUI Perceived Response Time
+
+I guess it's pretty obvious that _perceived response time_ won't be testable at the "unit" level because in order to measure it we have to make round trips to the back end. 
+
+#### Thick-Client GUIs 
+
+Thick-client GUIs have mostly the same general characteristics as webapp GUIs. For purposes of unit testing, the main difference is that thick-client GUIs are usually written in the same programming language as the rest of the application. That makes it easier to write unit checks against the GUI components. 
+
+On the other hand, most thick-client GUIs are built using tools that generate GUI widgets and decorate them with the details we want, such as labels, conditional visibility, and response to user gestures. Most of the time, thick-client GUIs fall into the same category as other forms of automatically-generated code. Their functionality is more easily checked at the integration/functional level than the unit level.
+
+#### Mobile Device GUIs 
+
+If you use Android Studio (or similar) or iOS development tools to develop front-end apps for mobile devices, the tooling will generate boilerplate examples of unit tests and instrumentation tests. Unfortunately, most people ignore these and build applications that have no tests. 
+
+## What About Unit Testing "Glue" Code? 
+
+Many applications make use of various libraries and frameworks to handle common functionality that isn't part of the unique business logic of the solution. For instance, a Java webapp might use Java Server Faces; a Python webapp might use Django; a Ruby webapp might use Rails. 
+
+A rule of thumb for designing such applications is to separate the "business logic" bits from the bits that interact with the framework. The bits that interact with the framework contain only enough logic to connect the dots between the framework and the application. Some people call that "glue" code; it glues the application to the framework.
+
+Typically, there's no need to unit test glue code separately from the rest of the application. Any issues with it will pop up immediately during integration testing. The most we can do with it is to assert that our code issues the correct calls to the framework's APIs; that's an implementation-aware check and therefore fragile. 
+
+## What About Metrics Related to Unit Testing? 
+
+It's not uncommon for people to get carried away with test-related metrics. The most popular metric for abuse is _code coverage_, especially line coverage. The value of this metric is already questionable, and the value of trying to achieve a coverage target doubly so. 
+
+A clever programmer can easily game code coverage metrics. Spending time doing that instead of on developing meaningful unit tests is waste. 
+
+One of the most egregious examples I've seen was in a Java codebase. Java enums are implemented such that the compiler generates a few lines of source code that are then compiled down to bytecodes. These lines are not written by application developers, but code coverage tools still count them as "source." 
+
+To achieve 100% line coverage, a clever programmer wrote a fairly convoluted test class that would cause the generated source lines in Java enums to be counted as "covered" by the coverage tool. I'm sure it was an interesting puzzle to solve; but please don't do this sort of thing.
+
+Another common issue with using test-related metrics is the idea that a certain percentage of failing tests is acceptable. Teams will set a standard that code can't be merged unless at least _X_% of unit tests are passing. 
+
+In reality, something is wrong if you have _any_ failing test cases. You should have a look at your test suite to see why the tests fail. If they have been accepted by the team more than once, it's probably because they aren't valid or useful, and people have learned to ignore the failures. Do something about that instead of accepting a passing rate under 100%.
+
+If we don't look at code coverage, how will we know whether we're improving? Improving the quality and usefulness of your executable checks will result in visible changes in delivery metrics. Cycle Time and Lead Time will decrease. Instances of back-flows from testers to programmers to fix issues prior to deployment will decline. 
+
+An interesting metric supported in SonarQube is called Cognitive Complexity. It measures the relative difficulty of understanding and working with the code. If you see a downward trend over time in Cognitive Complexity, it's because you've been taking practical steps to improve your delivery effectiveness. 
+
 ## Continuous Delivery Pipeline 
 
-Unit tests fit into a CI/CD pipeline near the beginning, after any forms of static analysis that might be part of the pipeline and before any executable tests of greater scope than a "unit." 
+Unit tests fit into a CI/CD pipeline near the beginning, after any forms of static and dynamic code analysis that might be part of the pipeline and before any executable tests of greater scope than a "unit." 
 
 ## Checkpoint 
 

@@ -435,7 +435,7 @@ In addition, localization is typically not within the scope of the software deve
 
 #### GUI Security
 
-Security for webapps usually comes down to configuration settings, for instance to disallow cross-site scripting. It's possible that JavaScript/TypeScript code running in the front-end will enable security exploits. That's covered in our unit checks for functions in the scripts. 
+Security for webapps usually comes down to configuration settings, for instance to disallow cross-site scripting. It's possible that JavaScript/TypeScript code running in the front-end will enable security exploits. That's _partially_ covered in our unit checks for functions in the scripts, but can't be adequately checked using automated tests. 
 
 #### GUI Content
 

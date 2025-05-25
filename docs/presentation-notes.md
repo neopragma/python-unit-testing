@@ -493,6 +493,8 @@ If we don't look at code coverage, how will we know whether we're improving? Imp
 
 An interesting metric supported in SonarQube is called Cognitive Complexity. It measures the relative difficulty of understanding and working with the code. If you see a downward trend over time in Cognitive Complexity, it's because you've been taking practical steps to improve your delivery effectiveness. 
 
+Increasing your unit test coverage may be one of the beneficial things you've been doing that influences meaningful metrics, but avoid the trap of focusing on coverage metrics for their own sake.
+
 ## Continuous Delivery Pipeline 
 
 Unit tests fit into a CI/CD pipeline near the beginning, after any forms of static and dynamic code analysis that might be part of the pipeline and before any executable tests of greater scope than a "unit." 

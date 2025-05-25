@@ -14,13 +14,14 @@ This repo supports a presentation and workshop. Some notes about running the exa
 1. (Code) Using an LLM assistant 
 1. (Talk) When Unit Testing Is Not Useful
 1. (Talk) Libraries, Frameworks, and External Resources
-1. (????) What about unit testing user interfaces?
-1. (????) What about testing "glue" code?
-1. (????) What about metrics related to unit testing?
+1. (Talk) What about unit testing user interfaces?
+1. (Talk) What about testing "glue" code?
+1. (Talk) What about metrics related to unit testing?
 1. (Talk) Where do unit tests fit in a CI/CD pipeline?
 1. (Demo) Property-based testing 
 1. (Demo) Mutation testing 
 1. (Talk) Exploratory testing 
+1. (Talk) Testing after deployment
 
 ## Running the examples 
 

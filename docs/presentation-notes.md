@@ -287,6 +287,10 @@ In the YouTube video linked on the slide, Sandi Metz walks through the Gilded Ro
 
 The problematic code in the Gilded Rose exercise has a zig-zag shape due to the repetitious if/else blocks. This gives us some clues about where we might break up the code or add sensing variables to explore the behavior of the code. 
 
+An aside: What I'm describing here is _testing_. We're _exploring_ the code to learn more about what it does. We're using _the same tools_ we would use to write automated checks. Whether we're _testing_ or _checking_ isn't a question of which tools we're using; it's a question of what we're doing and why.
+
+Back to the topic...
+
 The boundaries of if/else blocks are often _seams_ where we can extract chunks of code into smaller methods. Once we've learned what the code is doing, we don't necessarily keep all those smaller methods. Method extraction may be one step in a longer process of understanding and remediating the code. 
 
 When refactorings appear to be feasible, one approach is to go ahead and do them even while reading through the code for the first time. Arlo Belshee calls it _read by refactoring_. You don't just _look_ at the code, you go ahead and rip it apart as you go. In some cases this can help you understand what's going on in a big chunk of monolithic code.

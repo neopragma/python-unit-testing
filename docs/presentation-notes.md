@@ -241,6 +241,20 @@ _the rename refactoring is so common that it has its own entry on the context me
 
 _note that with Copilot enabled, we can engage it to perform refactorings on the code, too_ 
 
+## Unit Tests as a Safety Net for Refactoring 
+
+In a unit test case you can make assertions about any aspect of the SUT. 
+
+When the test cases are agnostic about the underlying implementation of the SUT, and they only verify the visible behavior of the SUT as seen through its public APIs, then tests that pass before refactoring the production code will still pass afterward. This provides a sort of "safety net" for refactoring. 
+
+Refactoring is not supposed to change the behavior of the SUT as seen through its public APIs. So if an implementation-agnostic test case fails after refactoring, it's a signal that you've inadvertently "broken" some logic.
+
+On the other hand, if a test case depends on the underlying implementation of the SUT to pass, then refactoring the SUT might change that implementation and cause the test case to fail. Then you can't be sure whether you've broken some logic that was working before you refactored. 
+
+The rule of thumb is to write test cases such that they don't depend on or even know about the underlying implementation details of the SUT. Just make assertions about the values returned from methods you're checking. 
+
+As with anything else in our field, this is not a universal rule. Check implementation details if you must, but try to avoid it as much as you can.
+
 ## Approaching a Code Base That Lacks Unit Tests 
 
 An all-too-common situation is that we must make changes to an existing code base that doesn't have any executable tests to provide a safety net. 

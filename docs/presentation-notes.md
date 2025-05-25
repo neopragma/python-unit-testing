@@ -541,17 +541,29 @@ _demonstrate mutation testing_
 
 Exploratory Testing is human testing at the level of the entire application. It is not a form of unit checking. 
 
-Typically, a software team will allocate a set amount of time on a regular basis for Exploratory Testing. The whole team participates. 
+You will find numerous online and print resources about Exploratory Testing. Unfortunately, most of them are incomplete, self-contradictory, describe an obsolete form of the technique, or are just plain wrong. 
 
-Someone who is relatively senior in software testing develops a theme for the Exploratory Testing session, and team members work in twos or threes to explore the behavior of the application around that theme. 
+Most descriptions of Exploratory Testing describe it along the lines of _unstructured_, _ad hoc_, _free-form_, or _lacking proper planning_. Most resources describe Exploratory Testing as if it were an isolated activity performed by "a tester" who reports their findings asynchronously. 
 
-Examples of themes include internationalization, accessibilty, usability, user experience, error-handling, or the correctness of a given function of the application, such as transferring funds between bank accounts. 
+In contemporary practice, Exploratory Testing is performed on the basis of a _strategy_ or _theme_ rather than a step-by-step test plan. This may be the reason some people think of it as _unstructured_ or _unplanned_. The testers need freedom to follow their results to the next logical question; that doesn't mean there's no planning or structure at all. 
 
-The combination of different kinds of checking and testing, at different levels of abstraction, helps us gain confidence that our solution will not crash and burn in production. 
+Besides that, Exploratory Testing isn't usually performed by just one person, "a tester," who works in isolation. 
 
-But there are no guarantees! Such things as the number of processor cores in a given server, a memory leak in an application that shares a server with ours, gray failures in a cloud environment, and timing issues in distributed applications can't be reliably replicated in a test environment. 
+Typically, a software team will allocate a set amount of time on a regular basis for Exploratory Testing. It may be done once a month, once a week, once per iteration, or on some other cadence that makes sense in context. It isn't an occasional or random or _ad hoc_ thing. The whole team participates. 
 
-That's the reason we need observability tools in production, and a rational strategy for managing production server instances. Those topics are out of scope here. 
+Someone who is relatively senior in software testing develops a theme for the Exploratory Testing session, and team members work in twos or threes to explore the behavior of the application around that theme. Each pair or group may have a different strategy to follow, or they may all follow the same strategy in any given session. 
+
+Examples of _themes_ include internationalization, accessibilty, user experience, security, error-handling, or any other specific _concern_ of the application. 
+
+A _strategy_ might be to follow the work flow of a user as they carry out a particular business function or end-user activity from start to finish, like transferring funds between bank accounts, registering a new user for an online service, or purchasing items from an online store.
+
+## After Deployment, Are We Finished With Testing?
+
+The combination of different kinds of checking and testing, at different levels of abstraction, at different points in the development/delivery process, helps us gain confidence that our solution will not crash and burn in production. 
+
+But there are no guarantees! Such things as the number of processor cores in a given server, a memory leak in an application that shares a server with ours, gray failures in a cloud environment, intentional hacking, and timing issues in distributed applications can't be reliably replicated in a test environment prior to deployment. 
+
+That's the reason we need observability tools in production, and a rational strategy for managing production server instances. Those topics are out of scope here, but the key point to take away is that some form of checking or testing occurs throughout the lifetime of the product. 
 
 
 

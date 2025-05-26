@@ -203,7 +203,9 @@ _discuss_
 
 ## Test-Driven Development Mechanics 
 
-What did we just do with the age class? It turns out there's a method to the madness of TDD. Mechanically, it's a repeating three-step process. Of course, there's more to think about than just that, but those are the bare mechanics of it.
+What did we just do with the age class? It turns out there's a method to the madness of TDD. Mechanically, it's a repeating three-step process. Of course, there's more to TDD than just that, but those are the bare mechanics of it. 
+
+There are a lot of lessons learned over the years about how to get the best value from TDD. Those details are out of scope for this workshop. We're just getting a taste of various things related to unit-level functional checks.
 
 _discuss slide content_ 
 

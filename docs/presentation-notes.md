@@ -1,6 +1,8 @@
 # Presentation Notes 
 ## Unit Testing and TDD - Python 
 
+_These notes go along with the slide deck, which is not included in this Github repo. The notes provide a sense of what I intend to talk about during the workshop. You may prefer to focus on different things or make different points, or even express a conflicting point of view on the subject. Hopefully the notes will be useful._ 
+
 This workshop is a basic, hands-on introduction to fundamental unit testing concepts and practices. This version of the workshop uses Python for the hands-on work.
 
 The introduction is broad rather than deep. We'll touch on three kinds of executable tests that typically exercise code at the "unit" level, including example-based testing, property-based testing, and mutation testing. 

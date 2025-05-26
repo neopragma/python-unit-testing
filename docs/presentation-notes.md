@@ -69,12 +69,6 @@ Regression tests are _checks_. They compare the present behavior of the applicat
 
 One benefit of having a comprehensive suite of unit tests is that they help us identify regressions early in the development process.
 
-## What's a "unit?" 
-
-_group discussion_ 
-
-A source of confusion about unit testing is the fact there's no generally-accepted or standard definition of "software unit." Let participants discuss this and see if different opinions emerge. Guide them toward the understanding that we usually think of a software unit as _small_.  
-
 ## Scope (and cost) of a check or test 
 
 To check application functionality end-to-end may require considerable setup time, the check is susceptible to failure for a variety of reasons besides the functionality of the SUT, execution time may be long, and there may not be enough time available to exercise the application sufficiently - we may have to skip some of the checks. Yet it is important to check the entire application to a reasonable extent.
@@ -108,6 +102,12 @@ Ultimately we may need very few checks of large scope, like end-to-end tests.
 ## Manual testing 
 
 "Real" testing can't be automated, but is still important. We'll talk about a technique called Exploratory Testing later. As information about the behavior of the application is discovered through testing, we can often capture it in the form of executable checks once we understand what to expect and how to set up the conditions for the behavior in a repeatable way. 
+
+## What's a "unit?" 
+
+_group discussion_ 
+
+A source of confusion about unit testing is the fact there's no generally-accepted or standard definition of "software unit." Let participants discuss this and see if different opinions emerge. Guide them toward the understanding that we usually think of a software unit as _small_.  
 
 ## Michael Feathers' rules for a unit test
 

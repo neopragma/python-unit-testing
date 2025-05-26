@@ -203,17 +203,35 @@ Now that the application behaves the way we want it to for "Adolescents," repeat
 
 _let participants work - assist as needed - discuss differences in the 2 approaches_ 
 
-## If we write tests before production code...
+## Red-Green-Refactor Cycle 
 
-_discuss_ 
+
+
+The test-driven development process is often depicted as a circle with three steps labeled _red_, _green_, and _refactor_. The colors red and green are used in software development tools that display the results of executable test cases. As you might guess, red represents a failed test case and green represents a test case that passed - that is, its assertion was true. 
+
+What did we just do with the age class? It turns out there's a method to the madness of TDD. Mechanically, it's a repeating three-step process. Of course, there's more to TDD than just that, but those are the bare mechanics of it. 
 
 ## Test-Driven Development Mechanics 
 
-What did we just do with the age class? It turns out there's a method to the madness of TDD. Mechanically, it's a repeating three-step process. Of course, there's more to TDD than just that, but those are the bare mechanics of it. 
+We want to repeat this cycle in very small iterations. That way, when something goes wrong we immediately know where to look for the problem in the code; it will be the very last change we made. Because of this, people who use TDD rarely use a debugger during development. 
+
+But we don't blindly start writing just any old thing. The TDD cycle occurs as part of our overall development process. Before we start coding, we have to think about what small piece of functionality we'd like to create next. We might identify several test cases that will help us arrive at our goal. Then we pick the one we'd like to start with, and write just that single example. 
+
+Red doesn't mean just any old shade of red. The test case has to fail for the right reason. What's the right reason? When the SUT runs, the result doesn't match our expectation, as expressed in the assertion in the test case. Other reasons for failure don't count. We have to work through those just to reach our starting point - a meaningful red. 
+
+Then we write just enough code to make our new test case pass, along with all the previous ones. We don't write any more production code than that, even if it's obvious we haven't developed much of the necessary logic yet. We want all the logic to be driven out by test cases, one by one. 
+
+And we want to keep the code clean little by little, as we go along, rather than building up a lot of design debt. 
+
+Sounds simple, right? Well, as the old saying goes, the devil is in the details.
 
 There are a lot of lessons learned over the years about how to get the best value from TDD. Those details are out of scope for this workshop. We're just getting a taste of various things related to unit-level functional checks.
 
 _discuss slide content_ 
+
+## If we write tests before production code...
+
+_Facilitate a group discussion. We want the group to arrive at a couple of points: (1) during development, TDD is purely a design and development process; (2) once the code has been written, the unit test suite that results from TDD becomes a regression test suite. So, TDD is partly a design process and partly a testing process, depending on where we are in the development cycle and the reasons why we're writing a test case._ 
 
 ## Reverse Polish Notation 
 

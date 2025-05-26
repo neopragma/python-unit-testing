@@ -205,11 +205,9 @@ _let participants work - assist as needed - discuss differences in the 2 approac
 
 ## Red-Green-Refactor Cycle 
 
-
+What did we just do with the age class? It turns out there's a method to the madness of TDD. Mechanically, it's a repeating three-step process. Of course, there's more to TDD than just that, but those are the bare mechanics of it. 
 
 The test-driven development process is often depicted as a circle with three steps labeled _red_, _green_, and _refactor_. The colors red and green are used in software development tools that display the results of executable test cases. As you might guess, red represents a failed test case and green represents a test case that passed - that is, its assertion was true. 
-
-What did we just do with the age class? It turns out there's a method to the madness of TDD. Mechanically, it's a repeating three-step process. Of course, there's more to TDD than just that, but those are the bare mechanics of it. 
 
 ## Test-Driven Development Mechanics 
 

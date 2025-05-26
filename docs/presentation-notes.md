@@ -77,6 +77,10 @@ When we check functionality at a fine-grained level, we can fully control the ru
 
 What we'd like to have is the appropriate mix of fine-grained, mid-level, and end-to-end checks to give us high confidence in the code and to detect regressions accurately and early.
 
+The way to accomplish this is to check as much functionality as we can in small chunks, using test cases that are easy to set up, cheap to run, and fast. To check aspects of the system that can't be assessed in a meaningful way in very small chunks, we write test cases that exercise a larger portion of the application. 
+
+Hopefully, we can avoid having to check much of the functionality by running the entire system, because those tests will be the most expensive, the slowest, and the most complicated to set up.
+
 ## Test Automation Pyramid 
 
 The original test automation pyramid was built by the ancient Egyptians with the assistance of space aliens. Or not.

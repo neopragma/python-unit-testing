@@ -289,7 +289,7 @@ Once we have a few tests in place, it becomes easier to work with the code. But 
 
 ## Foodie: Legacy Code with Multiple Concerns 
 
-Quite often, when unit tests are written after the production code - or when they're never written at all - the production code tends to violate one of the most fundamental software design principles of all - separation of concerns. Different concerns are jumbled together in the same source units. 
+Quite often, when unit tests are written after the production code - or when they're never written at all - the production code tends to violate one of the most fundamental software design principles of all - separation of concerns. Different concerns are jumbled together in the same source units. This leads to poor cohesion and tight coupling.
 
 Code like this can be difficult to unit test unless we break out the different concerns and/or set up a lot of mocks and stubs to fake out the portions of the code that aren't of interest to each particular test case.
 

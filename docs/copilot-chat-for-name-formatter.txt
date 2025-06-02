@@ -1,0 +1,298 @@
+query:
+
+Write unit tests for a solution that accepts a string as input and produces a string as output. The input string may contain two or three tokens representing, in order: first name, middle name, last name. The middle name may be omitted. The output string is the name formatted as last name, comma, first name, comma, middle initial, period. When the middle name is omitted, the output consists of last name, comma, first name. Empty input, too few tokens, and too many tokens are errors. Then write a solution that passes all the unit tests.
+
+response: 
+
+Let's start with the tests first:
+
+import pytest
+from src.name_formatter import NameFormatter
+
+class TestNameFormatter:
+    def setup_method(self):
+        self.formatter = NameFormatter()
+
+    def test_formats_name_with_middle_name(self):
+        result = self.formatter.format_name("John Alan Smith")
+        assert result == "Smith, John, A."
+
+    def test_formats_name_without_middle_name(self):
+        result = self.formatter.format_name("John Smith")
+        assert result == "Smith, John"
+
+    def test_handles_extra_whitespace(self):
+        result = self.formatter.format_name("  John   Alan   Smith  ")
+        assert result == "Smith, John, A."
+
+    def test_raises_error_for_empty_string(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("")
+        assert str(exc.value) == "Input must contain 2 or 3 names"
+
+    def test_raises_error_for_single_name(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("John")
+        assert str(exc.value) == "Input must contain 2 or 3 names"
+
+    def test_raises_error_for_too_many_names(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("John Alan Smith Jones")
+        assert str(exc.value) == "Input must contain 2 or 3 names"
+
+Now the implementation:
+
+class NameFormatter:
+    def format_name(self, full_name: str) -> str:
+        """
+        Formats a name as: 'Last, First, M.' or 'Last, First'
+        depending on whether middle name is present
+        """
+        tokens = full_name.strip().split()
+        
+        if len(tokens) == 2:
+            first_name, last_name = tokens
+            return f"{last_name}, {first_name}"
+        elif len(tokens) == 3:
+            first_name, middle_name, last_name = tokens
+            return f"{last_name}, {first_name}, {middle_name[0]}."
+        else:
+            raise ValueError("Input must contain 2 or 3 names")
+
+The solution:
+
+1. Takes a string input containing 2 or 3 names
+2. Handles extra whitespace with strip() and split()
+3. For 2 names: formats as "Last, First"
+4. For 3 names: formats as "Last, First, M." where M is middle initial
+5. Raises ValueError for invalid inputs (empty, 1 name, or >3 names)
+
+The tests verify:
+
+1. Basic functionality with and without middle name
+2. Whitespace handling
+3. Error cases for invalid inputs
+
+
+query:
+
+Include test cases for input values that contain extra whitespace.
+
+
+response:
+
+I'll modify the tests to include more whitespace cases. Here's the updated test file:
+
+import pytest
+from src.name_formatter import NameFormatter
+
+class TestNameFormatter:
+    def setup_method(self):
+        self.formatter = NameFormatter()
+
+    def test_formats_name_with_middle_name(self):
+        result = self.formatter.format_name("John Alan Smith")
+        assert result == "Smith, John, A."
+
+    def test_formats_name_without_middle_name(self):
+        result = self.formatter.format_name("John Smith")
+        assert result == "Smith, John"
+
+    def test_handles_leading_and_trailing_whitespace(self):
+        result = self.formatter.format_name("   John Alan Smith   ")
+        assert result == "Smith, John, A."
+
+    def test_handles_multiple_spaces_between_names(self):
+        result = self.formatter.format_name("John    Alan     Smith")
+        assert result == "Smith, John, A."
+
+    def test_handles_tabs_and_newlines(self):
+        result = self.formatter.format_name("John\tAlan\nSmith")
+        assert result == "Smith, John, A."
+
+    def test_raises_error_for_empty_string(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("")
+        assert str(exc.value) == "Input must contain 2 or 3 names"
+
+    def test_raises_error_for_single_name(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("John")
+        assert str(exc.value) == "Input must contain 2 or 3 names"
+
+    def test_raises_error_for_too_many_names(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("John Alan Smith Jones")
+        assert str(exc.value) == "Input must contain 2 or 3 names"
+
+    def test_raises_error_for_whitespace_only(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("   ")
+        assert str(exc.value) == "Input must contain 2 or 3 names"
+
+I added these new test cases to verify whitespace handling:
+
+1. Leading and trailing whitespace
+2. Multiple spaces between names
+3. Tabs and newlines between names
+4. Whitespace-only input string
+
+Now we'll need a solution that handles all these cases correctly.
+
+
+query:
+
+Write the solution. 
+
+response:
+
+Based on our test cases, here's the solution:
+
+class NameFormatter:
+    def format_name(self, full_name: str) -> str:
+        """
+        Formats full name as 'Last, First, M.' or 'Last, First'
+        Handles whitespace variations in input
+        Raises ValueError for invalid inputs
+        """
+        # Remove leading/trailing whitespace and normalize internal spaces
+        tokens = [t for t in full_name.strip().split() if t]
+        
+        if len(tokens) == 2:
+            first_name, last_name = tokens
+            return f"{last_name}, {first_name}"
+        elif len(tokens) == 3:
+            first_name, middle_name, last_name = tokens
+            return f"{last_name}, {first_name}, {middle_name[0]}."
+        else:
+            raise ValueError("Input must contain 2 or 3 names")
+
+Key features of the solution:
+
+1. Uses list comprehension with strip() and split() to handle various whitespace cases
+2. Filters out empty tokens with if t
+3. Returns formatted string for 2-name case: "Last, First"
+4. Returns formatted string for 3-name case: "Last, First, M."
+5. Raises ValueError for invalid inputs
+6. Uses type hints for clarity
+7. Includes docstring describing the behavior
+
+The solution handles all the test cases we wrote, including whitespace variations and error conditions.
+
+
+query:
+
+Modify the solution as follows. The first input argument is a language code. The second argument is the unformatted name. Language codes supported are ES and EN. Any other value is an error. When the language code is EN the functionality is the same as in the previous solution. When the language code is ES the input string may contain 3 or 4 tokens, representing 'primer nombre', 'segundo nombre', 'primer appellido', 'segundo appellido'. The output string must contain 'primer appellido', comma, space, first letter of 'segundo appellido', period, space, 'primer nombre', comma, space, first letter of 'segundo nombre'. When 3 tokens are input, assume 'segundo appellido' has been omitted. When 2 tokens are input, assume both 'segundo appellido' and 'segundo nombre' have been omitted. Do not output commas or periods for omitted values. Write the tests first.
+
+response:
+
+Let's write the tests first: 
+
+import pytest
+from src.name_formatter import NameFormatter
+
+class TestNameFormatter:
+    def setup_method(self):
+        self.formatter = NameFormatter()
+
+    # English name tests
+    def test_formats_english_name_with_middle_name(self):
+        result = self.formatter.format_name("EN", "John Alan Smith")
+        assert result == "Smith, John, A."
+
+    def test_formats_english_name_without_middle_name(self):
+        result = self.formatter.format_name("EN", "John Smith")
+        assert result == "Smith, John"
+
+    # Spanish name tests
+    def test_formats_spanish_name_with_four_parts(self):
+        result = self.formatter.format_name("ES", "Juan Carlos Garcia Lopez")
+        assert result == "Garcia, L., Juan, C."
+
+    def test_formats_spanish_name_with_three_parts(self):
+        result = self.formatter.format_name("ES", "Juan Carlos Garcia")
+        assert result == "Garcia, Juan, C."
+
+    def test_formats_spanish_name_with_two_parts(self):
+        result = self.formatter.format_name("ES", "Juan Garcia")
+        assert result == "Garcia, Juan"
+
+    # Error cases
+    def test_raises_error_for_invalid_language_code(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("FR", "John Smith")
+        assert str(exc.value) == "Unsupported language code: FR"
+
+    def test_raises_error_for_empty_string(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("EN", "")
+        assert str(exc.value) == "Name cannot be empty"
+
+    def test_raises_error_for_too_many_names_english(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("EN", "John Alan Smith Jones")
+        assert str(exc.value) == "English names must have 2 or 3 parts"
+
+    def test_raises_error_for_too_many_names_spanish(self):
+        with pytest.raises(ValueError) as exc:
+            self.formatter.format_name("ES", "Juan Carlos Garcia Lopez Martinez")
+        assert str(exc.value) == "Spanish names must have 2, 3, or 4 parts"
+
+Now the implementation:
+
+class NameFormatter:
+    def format_name(self, lang_code: str, full_name: str) -> str:
+        """
+        Formats names according to language-specific rules
+        EN: Last, First, M.
+        ES: PrimerApellido, SegundoApellidoInitial., PrimerNombre, SegundoNombreInitial.
+        """
+        if not full_name.strip():
+            raise ValueError("Name cannot be empty")
+
+        if lang_code not in ["EN", "ES"]:
+            raise ValueError(f"Unsupported language code: {lang_code}")
+
+        tokens = full_name.strip().split()
+
+        if lang_code == "EN":
+            return self._format_english_name(tokens)
+        else:
+            return self._format_spanish_name(tokens)
+
+    def _format_english_name(self, tokens: list) -> str:
+        if len(tokens) < 2 or len(tokens) > 3:
+            raise ValueError("English names must have 2 or 3 parts")
+            
+        if len(tokens) == 2:
+            first_name, last_name = tokens
+            return f"{last_name}, {first_name}"
+        else:
+            first_name, middle_name, last_name = tokens
+            return f"{last_name}, {first_name}, {middle_name[0]}."
+
+    def _format_spanish_name(self, tokens: list) -> str:
+        if len(tokens) < 2 or len(tokens) > 4:
+            raise ValueError("Spanish names must have 2, 3, or 4 parts")
+
+        if len(tokens) == 2:
+            primer_nombre, primer_apellido = tokens
+            return f"{primer_apellido}, {primer_nombre}"
+        
+        elif len(tokens) == 3:
+            primer_nombre, segundo_nombre, primer_apellido = tokens
+            return f"{primer_apellido}, {primer_nombre}, {segundo_nombre[0]}."
+            
+        else:
+            primer_nombre, segundo_nombre, primer_apellido, segundo_apellido = tokens
+            return f"{primer_apellido}, {segundo_apellido[0]}., {primer_nombre}, {segundo_nombre[0]}."
+
+
+The solution:
+
+1. Takes language code and name string as input
+2. Validates language code and empty input
+3. Uses separate private methods for English and Spanish formatting
+4. Handles different numbers of name parts for each language
+5. Formats output according to language-specific rules
+6. Raises appropriate error messages for invalid inputs
